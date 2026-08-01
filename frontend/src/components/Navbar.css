@@ -1,0 +1,205 @@
+.navbar {
+    width: 100%;
+    padding: 0.75rem 1.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface-glass);
+    border-bottom: 1px solid var(--surface-glass-border);
+    position: relative;
+    z-index: 100;
+}
+
+.navBrand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+.navLogoWrapper {
+    height: 34px;
+    width: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-card);
+    border: 1px solid var(--surface-glass-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navBrand:hover .navLogoWrapper {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.navLogoImg {
+    height: 26px;
+    width: 26px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.synapseBrandText {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.navBrandBeta {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: var(--surface-card);
+    color: var(--accent-cyan);
+    border: 1px solid var(--surface-glass-border);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.navActions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.themeToggleBtn, .navIconBtn {
+    background: var(--surface-card);
+    border: 1px solid var(--surface-glass-border);
+    color: var(--text-muted);
+    height: 36px;
+    width: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: var(--shadow-sm);
+}
+
+.themeToggleBtn {
+    color: var(--accent-cyan);
+}
+
+.navIconBtn {
+    color: var(--text-muted);
+}
+
+.themeToggleBtn:hover {
+    background: var(--surface-card-hover);
+    color: var(--accent-magenta);
+    border-color: var(--accent-magenta);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.navIconBtn:hover {
+    background: var(--surface-card-hover);
+    color: var(--accent-purple);
+    border-color: var(--accent-purple);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.authBtn {
+    background: var(--gradient-btn);
+    color: #ffffff !important;
+    border: none !important;
+    padding: 7px 16px !important;
+    border-radius: 8px !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin: 0 !important;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.authBtn:hover {
+    background: var(--gradient-btn-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.userIcon {
+    background: var(--surface-card);
+    height: 36px;
+    width: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border: 1px solid var(--surface-glass-border);
+    overflow: hidden;
+}
+
+.userIcon:hover {
+    color: var(--accent-cyan);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.dropdown {
+    position: absolute;
+    top: 4rem;
+    right: 1.8rem;
+    width: 210px;
+    background: var(--surface-glass);
+    border: 1px solid var(--surface-glass-border);
+    border-radius: 10px;
+    padding: 0.45rem;
+    box-shadow: var(--shadow-md);
+    animation: fadeInDown 0.2s ease-out;
+}
+
+.dropDownItem {
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-weight: 500;
+}
+
+.dropDownItem i {
+    color: var(--accent-magenta);
+    font-size: 0.9rem;
+    width: 18px;
+    text-align: center;
+}
+
+.dropDownItem:hover {
+    background: var(--surface-card-hover);
+    color: var(--text-main);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

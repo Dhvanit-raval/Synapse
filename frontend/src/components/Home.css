@@ -1,0 +1,203 @@
+.homeContainer {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.neuralCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.homeHero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 1.5rem 3rem 1.5rem;
+    max-width: 1000px;
+    margin: auto 0;
+    position: relative;
+    z-index: 1;
+}
+
+.heroBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: var(--surface-glass);
+    border: 1px solid var(--surface-glass-border);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-magenta);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.8rem;
+}
+
+.badgeDot {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: var(--accent-magenta);
+    box-shadow: 0 0 10px var(--accent-magenta);
+    animation: pulse 2s infinite;
+}
+
+.heroTitle {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--text-main);
+    margin-bottom: 1.25rem;
+}
+
+.heroDescription {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 680px;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.heroCtaGroup {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.primaryCta {
+    background: var(--gradient-btn);
+    color: #ffffff !important;
+    border: none !important;
+    padding: 14px 32px !important;
+    border-radius: 16px !important;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 8px 24px rgba(224, 20, 152, 0.4);
+    transition: all 0.3s ease;
+    margin: 0 !important;
+}
+
+.primaryCta:hover {
+    background: var(--gradient-btn-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(224, 20, 152, 0.6);
+}
+
+.primaryCta .ctaIcon {
+    font-size: 0.95rem;
+    transition: transform 0.2s ease;
+}
+
+.primaryCta:hover .ctaIcon {
+    transform: translateX(4px);
+}
+
+.secondaryCta {
+    background: var(--surface-glass);
+    color: var(--text-main) !important;
+    border: 1px solid var(--surface-glass-border) !important;
+    padding: 14px 28px !important;
+    border-radius: 16px !important;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 !important;
+}
+
+.secondaryCta:hover {
+    background: var(--surface-card-hover);
+    border-color: var(--accent-cyan) !important;
+    transform: translateY(-2px);
+}
+
+.featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    text-align: left;
+    perspective: 1000px;
+}
+
+.featureCard {
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--surface-glass-border);
+    border-radius: 24px;
+    padding: 1.8rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.featureCard:hover {
+    background: var(--surface-card-hover);
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg) scale(1.03);
+    box-shadow: var(--shadow-md), 0 15px 40px rgba(224, 20, 152, 0.15);
+}
+
+.featureIconWrapper {
+    height: 48px;
+    width: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+}
+
+.magentaGlow {
+    background: rgba(224, 20, 152, 0.15);
+    color: var(--accent-magenta);
+}
+
+.purpleGlow {
+    background: rgba(124, 58, 237, 0.15);
+    color: var(--accent-purple);
+}
+
+.cyanGlow {
+    background: rgba(0, 180, 216, 0.15);
+    color: var(--accent-cyan);
+}
+
+.featureCard h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.featureCard p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+}

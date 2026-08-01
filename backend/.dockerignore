@@ -1,0 +1,15 @@
+# Do not copy local dependencies into the image.
+# The image installs fresh dependencies with npm ci.
+node_modules
+
+# Ignore npm log files because they are local debug output.
+npm-debug.log*
+
+# Never copy real secrets into Docker images.
+.env
+
+# Ignore build output if it exists locally.
+dist
+
+# The Git history is not needed inside the runtime image.
+.git

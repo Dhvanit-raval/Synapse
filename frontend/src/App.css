@@ -1,0 +1,11 @@
+.main {
+  background-color: var(--bg-app);
+  background-image: 
+    radial-gradient(circle at 20% 15%, var(--bg-radial-1) 0%, transparent 38%),
+    radial-gradient(circle at 90% 80%, var(--bg-radial-2) 0%, transparent 42%);
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
