@@ -8,6 +8,13 @@
 
 Synapse AI is a full-stack AI chat workspace built with React, Vite, Express, MongoDB, and the Groq Chat Completions API. It includes user authentication, protected chat access, persistent conversation threads, Markdown rendering, syntax-highlighted code blocks, GitHub-flavored Markdown tables, theme settings, and a polished animated interface.
 
+## Live Deployment
+
+| App | URL |
+| --- | --- |
+| ![Frontend](https://img.shields.io/badge/Frontend-Vercel-000000?logo=vercel&logoColor=white) | https://synapse-eight-weld.vercel.app |
+| ![Backend](https://img.shields.io/badge/Backend-Render-46E3B7?logo=render&logoColor=white) | https://synapse-um0x.onrender.com |
+
 ## Preview
 
 Synapse provides a modern conversational UI with:
@@ -153,13 +160,18 @@ Install these before running the project:
 
 ## Environment Variables
 
+**Important:** Production deployments use separate frontend and backend domains:
+
+- Frontend: `https://synapse-eight-weld.vercel.app`
+- Backend: `https://synapse-um0x.onrender.com`
+
 Create a `.env` file inside the `backend` folder:
 
 ```env
 PORT=3000
 MONGO_URL=your_mongodb_connection_string
 GROQ_API_KEY=your_groq_api_key
-FRONTEND_URL=http://localhost:5173,http://localhost:8080
+FRONTEND_URL=http://localhost:5173,http://localhost:8080,https://synapse-eight-weld.vercel.app
 ```
 
 Do not commit real `.env` values to GitHub.
@@ -167,8 +179,12 @@ Do not commit real `.env` values to GitHub.
 For the frontend, API calls default to same-origin `/api` and Vite proxies those calls to the local backend during development. If the deployed frontend and backend are on different domains, create `frontend/.env`:
 
 ```env
-VITE_API_BASE_URL=https://your-backend-domain.com
+VITE_API_BASE_URL=https://synapse-um0x.onrender.com
 ```
+
+![Render](https://img.shields.io/badge/Render-backend-46E3B7?logo=render&logoColor=white) Set `FRONTEND_URL` to include the Vercel frontend domain.
+
+![Vercel](https://img.shields.io/badge/Vercel-frontend-000000?logo=vercel&logoColor=white) Set `VITE_API_BASE_URL` to the Render backend domain before building the frontend.
 
 ## Installation
 
@@ -336,12 +352,14 @@ frontend/dist
 
 ## Important Notes
 
-- The backend listens on `PORT`, defaulting to `3000`.
-- The frontend uses same-origin `/api` by default. Set `VITE_API_BASE_URL` only for separate frontend/backend domains.
-- CORS origins are configured through `FRONTEND_URL`, comma-separated.
-- Chat history requires MongoDB to be connected.
-- AI replies require a valid `GROQ_API_KEY`.
-- Font Awesome and Google Fonts are loaded from CDNs in `frontend/index.html`.
+- **Backend port:** The backend listens on `PORT`, defaulting to `3000`.
+- **Frontend domain:** The deployed frontend is `https://synapse-eight-weld.vercel.app`.
+- **Backend domain:** The deployed backend is `https://synapse-um0x.onrender.com`.
+- **API base:** The frontend uses same-origin `/api` by default. Set `VITE_API_BASE_URL` when the backend is on a separate domain.
+- **CORS:** Origins are configured through `FRONTEND_URL`, comma-separated.
+- **Database:** Chat history requires MongoDB to be connected.
+- **AI key:** AI replies require a valid `GROQ_API_KEY`.
+- **Assets:** Font Awesome and Google Fonts are loaded from CDNs in `frontend/index.html`.
 
 ## Troubleshooting
 
@@ -362,6 +380,12 @@ node checkKey.js
 
 Make sure the backend is running at `http://localhost:3000` and the frontend is running at `http://localhost:5173`.
 
+For the deployed app, confirm:
+
+- Vercel has `VITE_API_BASE_URL=https://synapse-um0x.onrender.com`.
+- Render has `FRONTEND_URL` containing `https://synapse-eight-weld.vercel.app`.
+- Both services were redeployed after changing environment variables.
+
 ### Markdown tables look broken
 
 Make sure `remark-gfm` is installed in the frontend dependencies and that the latest frontend build is running.
@@ -372,7 +396,6 @@ Make sure `remark-gfm` is installed in the frontend dependencies and that the la
 - Add refresh tokens or server-side sessions.
 - Add streaming responses from the backend.
 - Add automated frontend and backend tests.
-- Add production deployment configuration.
 - Add centralized error handling and request validation.
 
 ## License

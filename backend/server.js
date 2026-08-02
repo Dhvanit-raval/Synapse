@@ -9,7 +9,7 @@ configDotenv();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173,http://localhost:3000")
+const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173,http://localhost:3000,https://synapse-eight-weld.vercel.app")
     .split(",")
     .map(origin => origin.trim())
     .filter(Boolean);
@@ -93,4 +93,3 @@ connectDB()
 //         return res.status(500).json({ error: "Failed to reach Groq API" });
 //     }
 // });
-
