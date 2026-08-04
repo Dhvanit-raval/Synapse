@@ -4,11 +4,84 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.85rem;
     background: var(--surface-glass);
     border-bottom: 1px solid var(--surface-glass-border);
     position: relative;
     z-index: 100;
 }
+
+.sidebarToggleBtn {
+    background: var(--surface-card);
+    border: 1px solid var(--surface-glass-border);
+    color: var(--text-muted);
+    height: 36px;
+    width: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+}
+
+.sidebarToggleBtn:hover {
+    background: var(--surface-card-hover);
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 720px) {
+    .navbar {
+        padding: 0.75rem 0.9rem;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 0.55rem;
+    }
+
+    .navBrand {
+        flex: 1;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .navBrand .synapseBrandText {
+        white-space: nowrap;
+        max-width: 100%;
+    }
+
+    .navActions {
+        width: auto;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        margin-left: 0;
+        grid-column: auto;
+    }
+
+    .themeToggleBtn,
+    .navIconBtn,
+    .authBtn {
+        display: none;
+    }
+
+    .userIcon {
+        display: flex;
+        flex-shrink: 0;
+    }
+
+    .dropdown {
+        top: calc(100% + 0.45rem);
+        right: 0.9rem;
+        width: min(220px, calc(100vw - 1.8rem));
+    }
+}
+
 
 .navBrand {
     font-size: 1.25rem;

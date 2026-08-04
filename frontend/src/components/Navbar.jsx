@@ -5,7 +5,7 @@ import logo from '../assets/logo2.png'
 import Settings from './Settings/Settings.jsx'
 import './Navbar.css'
 
-export default function Navbar() {
+export default function Navbar({ onToggleSidebar, isSidebarVisible }) {
     const [isOpen, setIsOpen] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const [theme, setTheme] = useState(() => localStorage.getItem('synapse_theme') || 'dark');
@@ -32,6 +32,16 @@ export default function Navbar() {
     return (
         <>
             <div className="navbar">
+                {onToggleSidebar && (
+                    <button
+                        className="sidebarToggleBtn"
+                        onClick={onToggleSidebar}
+                        title={isSidebarVisible ? 'Hide sidebar' : 'Show sidebar'}
+                    >
+                        <i className={`fa-solid ${isSidebarVisible ? 'fa-xmark' : 'fa-bars'}`}></i>
+                    </button>
+                )}
+
                 <div className="navBrand" onClick={() => navigateTo('/')}>
                     <div className="navLogoWrapper">
                         <img src={logo} alt="Synapse" className="navLogoImg" />

@@ -6,7 +6,7 @@ import { apiUrl } from '../utils/apiBase.js'
 import logo from '../assets/logo2.png'
 import './Sidebar.css'
 
-export default function Sidebar() {
+export default function Sidebar({ isVisible, onClose }) {
     const { token } = useAuth();
     const { allThreads, setAllThreads, threadId, setNewChat, setReply, setPrompt, setThreadId, setPreviousChats } = useContext(ChatContext)
 
@@ -41,10 +41,12 @@ export default function Sidebar() {
         setReply(null);
         setThreadId(uuidv4());
         setPreviousChats([]);
+        onClose?.();
     }
 
     const changeThread = async (newThreadId) => {
         setThreadId(newThreadId);
+        onClose?.();
 
         try {
             const response = await fetch(apiUrl(`/api/thread/${newThreadId}`), {
@@ -86,8 +88,11 @@ export default function Sidebar() {
     }
 
     return (
-        <section className="sidebar">
+        <section className={`sidebar ${isVisible ? 'mobile-open' : 'sidebar-hidden'}`}>
             <div className="sidebarHeader">
+                <button className="closeSidebarBtn" onClick={onClose} aria-label="Close menu">
+                    <i className="fa-solid fa-xmark"></i>
+                </button>
                 <button className="newChatBtn" onClick={createNewChat}>
                     <div className="logoWrapper">
                         <img src={logo} alt="Synapse Logo" className='logo' />

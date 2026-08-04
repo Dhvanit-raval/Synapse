@@ -1,18 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { animate } from 'animejs';
 import logo from '../../assets/logo2.png';
+import {
+    announcePreferenceChange,
+    applySynapsePreferences,
+    getSynapsePreferences,
+    saveSynapsePreference,
+} from '../../utils/preferences.js';
 import './Settings.css';
 
 export default function Settings({ isOpen, onClose, currentTheme, onThemeChange }) {
-    const [fontSize, setFontSize] = useState(() => localStorage.getItem('synapse_fontSize') || 'medium');
-    const [chatBubbleStyle, setChatBubbleStyle] = useState(() => localStorage.getItem('synapse_bubbleStyle') || 'rounded');
-    const [animationsEnabled, setAnimationsEnabled] = useState(() => localStorage.getItem('synapse_animations') !== 'false');
-    const [messageSound, setMessageSound] = useState(() => localStorage.getItem('synapse_sound') !== 'false');
+    const [fontSize, setFontSize] = useState(() => getSynapsePreferences().fontSize);
+    const [chatBubbleStyle, setChatBubbleStyle] = useState(() => getSynapsePreferences().bubbleStyle);
+    const [animationsEnabled, setAnimationsEnabled] = useState(() => getSynapsePreferences().animationsEnabled);
+    const [messageSound, setMessageSound] = useState(() => getSynapsePreferences().messageSound);
     const panelRef = useRef(null);
     const overlayRef = useRef(null);
 
     useEffect(() => {
         if (isOpen && panelRef.current && overlayRef.current) {
+            if (!animationsEnabled) {
+                overlayRef.current.style.opacity = 1;
+                panelRef.current.style.transform = 'translateX(0%)';
+                return;
+            }
+
             animate(overlayRef.current, {
                 opacity: [0, 1],
                 duration: 250,
@@ -24,28 +36,51 @@ export default function Settings({ isOpen, onClose, currentTheme, onThemeChange 
                 ease: 'outExpo',
             });
         }
-    }, [isOpen]);
+    }, [isOpen, animationsEnabled]);
 
     useEffect(() => {
-        localStorage.setItem('synapse_fontSize', fontSize);
-        document.documentElement.setAttribute('data-font-size', fontSize);
+        saveSynapsePreference('fontSize', fontSize);
+        applySynapsePreferences({
+            ...getSynapsePreferences(),
+            fontSize,
+        });
+        announcePreferenceChange();
     }, [fontSize]);
 
     useEffect(() => {
-        localStorage.setItem('synapse_bubbleStyle', chatBubbleStyle);
-        document.documentElement.setAttribute('data-bubble-style', chatBubbleStyle);
+        saveSynapsePreference('bubbleStyle', chatBubbleStyle);
+        applySynapsePreferences({
+            ...getSynapsePreferences(),
+            bubbleStyle: chatBubbleStyle,
+        });
+        announcePreferenceChange();
     }, [chatBubbleStyle]);
 
     useEffect(() => {
-        localStorage.setItem('synapse_animations', animationsEnabled);
+        saveSynapsePreference('animations', animationsEnabled);
+        applySynapsePreferences({
+            ...getSynapsePreferences(),
+            animationsEnabled,
+        });
+        announcePreferenceChange();
     }, [animationsEnabled]);
 
     useEffect(() => {
-        localStorage.setItem('synapse_sound', messageSound);
+        saveSynapsePreference('sound', messageSound);
+        applySynapsePreferences({
+            ...getSynapsePreferences(),
+            messageSound,
+        });
+        announcePreferenceChange();
     }, [messageSound]);
 
     const handleClose = () => {
         if (panelRef.current && overlayRef.current) {
+            if (!animationsEnabled) {
+                onClose();
+                return;
+            }
+
             animate(panelRef.current, {
                 translateX: ['0%', '100%'],
                 duration: 300,

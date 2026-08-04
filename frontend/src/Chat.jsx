@@ -6,6 +6,7 @@ import Highlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
 import "highlight.js/styles/github-dark.css"
 import logo from './assets/logo2.png'
+import { areAnimationsEnabled } from './utils/preferences.js'
 import './Chat.css'
 
 function getNodeText(node) {
@@ -47,15 +48,30 @@ export default function Chat() {
 
     const { newChat, previousChats, reply, setPrompt } = useContext(ChatContext);
     const [typedReply, setTypedReply] = useState("");
+    const [animationsEnabled, setAnimationsEnabled] = useState(() => areAnimationsEnabled());
     const welcomeRef = useRef(null);
     const chatsEndRef = useRef(null);
     const shouldFollowReplyRef = useRef(true);
 
+    useEffect(() => {
+        const handlePreferenceChange = () => {
+            setAnimationsEnabled(areAnimationsEnabled());
+        };
+
+        window.addEventListener('synapse:preferences-changed', handlePreferenceChange);
+
+        return () => window.removeEventListener('synapse:preferences-changed', handlePreferenceChange);
+    }, []);
 
     //! Typing word effect
     useEffect(() => {
         if (!reply) {
             setTypedReply("");
+            return;
+        }
+
+        if (!animationsEnabled) {
+            setTypedReply(reply);
             return;
         }
 
@@ -75,11 +91,13 @@ export default function Chat() {
         }, 40);
 
         return () => clearInterval(interval);
-    }, [reply]);
+    }, [reply, animationsEnabled]);
 
     // Animate welcome hero on mount
     useEffect(() => {
         if (newChat && welcomeRef.current) {
+            if (!animationsEnabled) return;
+
             animate('.welcomeLogoRing', {
                 scale: [0, 1],
                 opacity: [0, 1],
@@ -113,7 +131,7 @@ export default function Chat() {
                 ease: 'outExpo',
             });
         }
-    }, [newChat]);
+    }, [newChat, animationsEnabled]);
 
     useEffect(() => {
         const scrollArea = document.querySelector('.chatScrollArea');
@@ -139,13 +157,15 @@ export default function Chat() {
         }
 
         if (chatsEndRef.current && shouldFollowReplyRef.current) {
-            chatsEndRef.current.scrollIntoView({ behavior: 'smooth' });
+            chatsEndRef.current.scrollIntoView({ behavior: animationsEnabled ? 'smooth' : 'auto' });
         }
-    }, [previousChats, typedReply]);
+    }, [previousChats, typedReply, animationsEnabled]);
 
 
     useEffect(() => {
         if (previousChats.length > 0) {
+            if (!animationsEnabled) return;
+
             const lastMsg = document.querySelector('.chats > div:last-child');
             if (lastMsg) {
                 animate(lastMsg, {
@@ -156,7 +176,7 @@ export default function Chat() {
                 });
             }
         }
-    }, [previousChats.length]);
+    }, [previousChats.length, animationsEnabled]);
 
     const handleChipClick = (suggestionText) => {
         if (setPrompt) {
@@ -177,30 +197,30 @@ export default function Chat() {
         <div className="chatContainer">
             {newChat && (
                 <div className="welcomeHero" ref={welcomeRef}>
-                    <div className="welcomeLogoRing" style={{ opacity: 0 }}>
+                    <div className="welcomeLogoRing" style={{ opacity: animationsEnabled ? 0 : 1 }}>
                         <img src={logo} alt="Synapse Logo" className="welcomeLogo" />
                     </div>
-                    <h1 className="welcomeTitle" style={{ opacity: 0 }}>
+                    <h1 className="welcomeTitle" style={{ opacity: animationsEnabled ? 0 : 1 }}>
                         Where should we <span className="synapseBrandText">begin?</span>
                     </h1>
-                    <p className="welcomeSubtitle" style={{ opacity: 0 }}>Connect your ideas with Synapse neural intelligence</p>
+                    <p className="welcomeSubtitle" style={{ opacity: animationsEnabled ? 0 : 1 }}>Connect your ideas with Synapse neural intelligence</p>
 
                     <div className="suggestionGrid">
-                        <div className="suggestionCard" style={{ opacity: 0 }} onClick={() => handleChipClick("Explain quantum computing in simple terms")}>
+                        <div className="suggestionCard" style={{ opacity: animationsEnabled ? 0 : 1 }} onClick={() => handleChipClick("Explain quantum computing in simple terms")}>
                             <i className="fa-solid fa-atom cardIcon"></i>
                             <div className="cardContent">
                                 <h4>Explain Concepts</h4>
                                 <p>Quantum computing in simple terms</p>
                             </div>
                         </div>
-                        <div className="suggestionCard" style={{ opacity: 0 }} onClick={() => handleChipClick("Write a clean React component for a responsive table")}>
+                        <div className="suggestionCard" style={{ opacity: animationsEnabled ? 0 : 1 }} onClick={() => handleChipClick("Write a clean React component for a responsive table")}>
                             <i className="fa-solid fa-code cardIcon"></i>
                             <div className="cardContent">
                                 <h4>Write Code</h4>
                                 <p>Clean React component for a responsive table</p>
                             </div>
                         </div>
-                        <div className="suggestionCard" style={{ opacity: 0 }} onClick={() => handleChipClick("Draft a creative pitch for an innovative AI app")}>
+                        <div className="suggestionCard" style={{ opacity: animationsEnabled ? 0 : 1 }} onClick={() => handleChipClick("Draft a creative pitch for an innovative AI app")}>
                             <i className="fa-solid fa-lightbulb cardIcon"></i>
                             <div className="cardContent">
                                 <h4>Brainstorm Ideas</h4>

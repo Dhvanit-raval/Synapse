@@ -29,7 +29,31 @@
     margin: auto 0;
     position: relative;
     z-index: 1;
+    width: 100%;
 }
+
+@media (max-width: 720px) {
+    .homeHero {
+        padding: 3rem 1rem 2.25rem;
+    }
+
+    .heroDescription {
+        font-size: 0.98rem;
+        margin-bottom: 2rem;
+    }
+
+    .heroCtaGroup {
+        width: 100%;
+        gap: 0.8rem;
+    }
+
+    .primaryCta,
+    .secondaryCta {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 
 .heroBadge {
     display: inline-flex;
@@ -44,6 +68,8 @@
     color: var(--accent-magenta);
     box-shadow: var(--shadow-sm);
     margin-bottom: 1.8rem;
+    text-align: center;
+    max-width: 100%;
 }
 
 .badgeDot {
@@ -139,6 +165,17 @@
     width: 100%;
     text-align: left;
     perspective: 1000px;
+}
+
+@media (max-width: 720px) {
+    .featuresGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .featureCard {
+        padding: 1.2rem;
+    }
 }
 
 .featureCard {

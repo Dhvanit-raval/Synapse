@@ -9,6 +9,32 @@
     min-height: 0;
 }
 
+@media (max-width: 720px) {
+    .chatContainer {
+        padding: 1rem 0.75rem;
+    }
+
+    .welcomeTitle {
+        font-size: 1.6rem;
+    }
+
+    .welcomeSubtitle {
+        font-size: 0.92rem;
+    }
+
+    .suggestionGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .userMessageWrapper {
+        max-width: 92%;
+    }
+
+    .aiMessageWrapper {
+        max-width: 100%;
+    }
+}
+
 .welcomeHero {
     display: flex;
     flex-direction: column;
@@ -40,14 +66,14 @@
 }
 
 .welcomeTitle {
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-scale));
     font-weight: 800;
     color: var(--text-main);
     margin-bottom: 0.5rem;
 }
 
 .welcomeSubtitle {
-    font-size: 1rem;
+    font-size: calc(1rem * var(--font-scale));
     color: var(--text-muted);
     margin-bottom: 2rem;
 }
@@ -95,14 +121,14 @@
 }
 
 .cardContent h4 {
-    font-size: 0.9rem;
+    font-size: calc(0.9rem * var(--font-scale));
     font-weight: 700;
     color: var(--text-main);
     margin-bottom: 0.2rem;
 }
 
 .cardContent p {
-    font-size: 0.8rem;
+    font-size: var(--secondary-font-size);
     color: var(--text-muted);
     line-height: 1.35;
 }
@@ -135,9 +161,9 @@
     border: 1px solid var(--user-msg-border);
     color: var(--text-main);
     padding: 11px 16px;
-    border-radius: 10px;
+    border-radius: var(--message-radius);
     width: fit-content;
-    font-size: 0.95rem;
+    font-size: var(--message-font-size);
     line-height: 1.5;
     box-shadow: none;
     word-break: break-word;
@@ -162,7 +188,7 @@
     height: 34px;
     width: 34px;
     min-width: 34px;
-    border-radius: 8px;
+    border-radius: min(8px, var(--message-radius));
     background: var(--surface-card);
     display: flex;
     align-items: center;
@@ -183,8 +209,8 @@
     border: 1px solid var(--ai-msg-border);
     color: var(--text-main);
     padding: 14px 18px;
-    border-radius: 10px;
-    font-size: 0.95rem;
+    border-radius: var(--message-radius);
+    font-size: var(--message-font-size);
     line-height: 1.6;
     text-align: left;
     box-shadow: none;
@@ -249,7 +275,7 @@
 
 .aiMessage code {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
+    font-size: calc(var(--message-font-size) * 0.9);
     background: rgba(56, 163, 184, 0.12);
     color: var(--accent-magenta);
     padding: 2px 6px;
@@ -319,7 +345,7 @@
     background: transparent !important;
     padding: 0;
     color: inherit;
-    font-size: 0.88rem;
+    font-size: calc(var(--message-font-size) * 0.93);
 }
 
 .hljs {

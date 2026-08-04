@@ -8,19 +8,20 @@ import { AuthProvider } from './context/AuthContext.jsx'
 import { ChatProvider } from './context/ChatContext.jsx';
 import './App.css'
 
-function ChatLayout() {
+function ChatLayout({ sidebarVisible, toggleSidebar }) {
   return (
     <ChatProvider>
-      <>
-        <Sidebar />
-        <Chatwindow />
-      </>
+      <div className={`chatLayout ${sidebarVisible ? '' : 'sidebar-hidden'}`}>
+        <Sidebar isVisible={sidebarVisible} onClose={toggleSidebar} />
+        <Chatwindow onToggleSidebar={toggleSidebar} isSidebarVisible={sidebarVisible} />
+      </div>
     </ChatProvider>
   )
 }
 
 function App() {
   const [path, setPath] = useState(window.location.pathname);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   useEffect(() => {
     const updatePath = () => setPath(window.location.pathname);
@@ -39,7 +40,10 @@ function App() {
     if (path === '/chat') {
       return (
         <ProtectedRoute>
-          <ChatLayout />
+          <ChatLayout
+            sidebarVisible={sidebarVisible}
+            toggleSidebar={() => setSidebarVisible((prev) => !prev)}
+          />
         </ProtectedRoute>
       );
     }

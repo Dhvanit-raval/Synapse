@@ -114,13 +114,13 @@
 }
 
 .settingName {
-    font-size: 0.92rem;
+    font-size: calc(0.92rem * var(--font-scale));
     font-weight: 600;
     color: var(--text-main);
 }
 
 .settingDesc {
-    font-size: 0.78rem;
+    font-size: var(--secondary-font-size);
     color: var(--text-subtle);
 }
 
@@ -140,7 +140,7 @@
     border: none !important;
     background: transparent !important;
     color: var(--text-muted) !important;
-    font-size: 0.8rem;
+    font-size: var(--secondary-font-size);
     font-weight: 600;
     cursor: pointer;
     display: flex;

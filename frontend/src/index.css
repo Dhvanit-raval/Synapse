@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root, [data-theme="dark"] {
+  --font-scale: 1;
+  --message-radius: 10px;
+  --message-font-size: 0.95rem;
+  --input-font-size: 0.95rem;
+  --secondary-font-size: 0.8rem;
+
   --bg-app: #0B0F17;
   --bg-radial-1: rgba(66, 85, 121, 0.16);
   --bg-radial-2: rgba(22, 93, 110, 0.10);
@@ -47,6 +53,39 @@
   --code-bg: #0d1117;
   --scrollbar-thumb: rgba(255, 255, 255, 0.18);
   --scrollbar-thumb-hover: rgba(224, 20, 152, 0.6);
+}
+
+[data-font-size="small"] {
+  --font-scale: 0.92;
+  --message-font-size: 0.88rem;
+  --input-font-size: 0.9rem;
+  --secondary-font-size: 0.75rem;
+}
+
+[data-font-size="medium"] {
+  --font-scale: 1;
+  --message-font-size: 0.95rem;
+  --input-font-size: 0.95rem;
+  --secondary-font-size: 0.8rem;
+}
+
+[data-font-size="large"] {
+  --font-scale: 1.12;
+  --message-font-size: 1.06rem;
+  --input-font-size: 1.04rem;
+  --secondary-font-size: 0.9rem;
+}
+
+[data-bubble-style="rounded"] {
+  --message-radius: 10px;
+}
+
+[data-bubble-style="sharp"] {
+  --message-radius: 3px;
+}
+
+[data-bubble-style="pill"] {
+  --message-radius: 20px;
 }
 
 [data-theme="light"] {
@@ -103,6 +142,14 @@
   margin: 0;
   padding: 0;
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
+}
+
+[data-animations="disabled"] *,
+[data-animations="disabled"] *::before,
+[data-animations="disabled"] *::after {
+  animation: none !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
 }
 
 body {
