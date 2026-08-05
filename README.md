@@ -400,4 +400,4 @@ Make sure `remark-gfm` is installed in the frontend dependencies and that the la
 
 ## License
 
-This project is currently private and does not include a license file. Add a license before publishing or distributing it.
+Distributed under the MIT License. See `LICENSE` for more information.
