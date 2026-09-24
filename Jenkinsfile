@@ -19,13 +19,6 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repo') {
-            steps {
-                //^ Clone the repository and check out its main branch.
-                git branch: 'main', url: 'https://^github.com/Dhvanit-raval/Synapse.git'
-            }
-        }
-
         stage('Build Docker Images') {
             steps {
                 //^ Build the frontend and backend images from their respective directories.
