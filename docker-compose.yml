@@ -1,67 +1,67 @@
-# Docker Compose runs the whole app together:
-# MongoDB database, Express backend, and React/Nginx frontend.
+#^ Docker Compose runs the whole app together:
+#^ MongoDB database, Express backend, and React/Nginx frontend.
 services:
   mongo:
-    # Use the official MongoDB image.
+    #^ Use the official MongoDB image.
     image: mongo:7
 
-    # Restart unless you manually stop it.
+    #^ Restart unless you manually stop it.
     restart: unless-stopped
 
-    # Store database files in a Docker volume so data survives container rebuilds.
+    #^ Store database files in a Docker volume so data survives container rebuilds.
     volumes:
       - mongo-data:/data/db
 
-    # Optional: expose MongoDB on your computer for tools like MongoDB Compass.
+    #^ Optional: expose MongoDB on your computer for tools like MongoDB Compass.
     ports:
       - "27017:27017"
 
   backend:
-    # Use the published backend image from Docker Hub.
+    #^ Use the published backend image from Docker Hub.
     image: dhvanitraval/synapse-backend:latest
 
-    # Keep the API running after crashes or machine restart.
+    #^ Keep the API running after crashes or machine restart.
     restart: unless-stopped
 
-    # Environment variables passed into the backend container.
+    #^ Environment variables passed into the backend container.
     environment:
-      # Express listens on this port inside the container.
+      #^ Express listens on this port inside the container.
       PORT: 3000
 
-      # The hostname "mongo" works because it is the Compose service name.
+      #^ The hostname "mongo" works because it is the Compose service name.
       MONGO_URL: mongodb://mongo:27017/synapse
 
-      # Read the Groq key from the root .env file.
+      #^ Read the Groq key from the root .env file.
       GROQ_API_KEY: ${GROQ_API_KEY}
 
-      # Origins allowed by backend CORS.
+      #^ Origins allowed by backend CORS.
       FRONTEND_URL: http://localhost:5173,http://localhost:8080,https://synapse-eight-weld.vercel.app
 
-    # Start MongoDB before starting the backend container.
+    #^ Start MongoDB before starting the backend container.
     depends_on:
       - mongo
 
-    # Map host port 3000 to backend container port 3000.
+    #^ Map host port 3000 to backend container port 3000.
     ports:
       - "3000:3000"
 
   frontend:
-    # Use the published frontend image from Docker Hub.
+    #^ Use the published frontend image from Docker Hub.
     image: dhvanitraval/synapse-frontend:latest
 
-    # Keep the frontend web server running.
+    #^ Keep the frontend web server running.
     restart: unless-stopped
 
-    # Start backend before frontend.
+    #^ Start backend before frontend.
     depends_on:
       - backend
 
-    # Open the app at http://localhost:8080 on your machine.
-    # Inside the container, Nginx listens on port 80.
+    #^ Open the app at http://localhost:8080 on your machine.
+    #^ Inside the container, Nginx listens on port 80.
     ports:
       - "8080:80"
 
-# Named volumes managed by Docker.
+#^ Named volumes managed by Docker.
 volumes:
-  # MongoDB data is stored here.
+  #^ MongoDB data is stored here.
   mongo-data:
