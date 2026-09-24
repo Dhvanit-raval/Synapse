@@ -64,13 +64,5 @@ pipeline {
             }
         }
 
-        stage('Send Email Notification') {
-            steps {
-                //^ Send a notification after all earlier stages succeed.
-                mail to: env.EMAIL,
-                     subject: 'Deployment Successful: Synapse Application',
-                     body: "The Synapse application is running. Frontend port: ${env.FRONTEND_HOST_PORT}; backend port: ${env.BACKEND_HOST_PORT}."
-            }
-        }
     }
 }
