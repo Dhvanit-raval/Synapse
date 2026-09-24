@@ -12,7 +12,7 @@ pipeline {
         IMAGE_BACKEND_NAME = 'dhvanitraval/synapse-backend'
         DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
         GROQ_CREDENTIALS_ID = 'groq-api-key'
-        FRONTEND_URL = 'http://16.16.98.231:8080,http://localhost:5173,http://localhost:8080,https://synapse-eight-weld.vercel.app'
+        FRONTEND_URL = 'http://16.16.98.231:8081,http://localhost:5173,http://localhost:8081,https://synapse-eight-weld.vercel.app'
         EMAIL = 'dhvanitraval.538@gmail.com'
     }
 

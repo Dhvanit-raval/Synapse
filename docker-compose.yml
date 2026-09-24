@@ -56,10 +56,10 @@ services:
     depends_on:
       - backend
 
-    #^ Open the app at http://localhost:8080 on your machine.
+    #^ Open the app at http://localhost:8081 on your machine.
     #^ Inside the container, Nginx listens on port 80.
     ports:
-      - "8080:80"
+      - "8081:80"
 
 #^ Named volumes managed by Docker.
 volumes:
