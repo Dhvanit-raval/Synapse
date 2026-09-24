@@ -35,7 +35,7 @@ services:
       GROQ_API_KEY: ${GROQ_API_KEY}
 
       #^ Origins allowed by backend CORS.
-      FRONTEND_URL: http://localhost:5173,http://localhost:8080,https://synapse-eight-weld.vercel.app
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:5173,http://localhost:8080,https://synapse-eight-weld.vercel.app}
 
     #^ Start MongoDB before starting the backend container.
     depends_on:
